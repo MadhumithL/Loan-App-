@@ -10,10 +10,10 @@ import (
 
 func getAppRouter() *mux.Router {
 	router := mux.NewRouter()
-	router.HandleFunc("/createloan", AddContext(CreateLoan)).Methods("POST")
-	router.HandleFunc("/admin/approve/{loanId}", AddContext(ApproveLaon)).Methods("PUT")
-	router.HandleFunc("/track/{loanId}", AddContext(TrackLoanApplication)).Methods("GET")
-	router.HandleFunc("/pay/{loanId}", AddContext(RepayAmount)).Methods("POST")
+	router.HandleFunc("/createloan", AddContext(CreateLoan)).Methods("POST")		// creates a loan_id, returns with terms scheduled
+	router.HandleFunc("/admin/approve/{loanId}", AddContext(ApproveLaon)).Methods("PUT")	//updates the loan status to approves
+	router.HandleFunc("/track/{loanId}", AddContext(TrackLoanApplication)).Methods("GET")	//tracks the loanstatus and EMIs paid
+	router.HandleFunc("/pay/{loanId}", AddContext(RepayAmount)).Methods("POST")		//change the status of the emi to paid
 	return router
 }
 
