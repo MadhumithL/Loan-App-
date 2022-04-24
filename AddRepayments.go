@@ -20,7 +20,7 @@ func RepayAmount(response http.ResponseWriter, request *http.Request) {
 	var amount PayAmount
 	err := json.NewDecoder(request.Body).Decode(&amount)
 	if err != nil {
-		SendHttpResponse(400, response, nil)
+		SendHttpResponse(503, response, nil)
 	}
 	var statusPaid Status
 	if LoanDetails.LoanID.Status == "PAID" && amount.Amount > 0 || LoanDetails.LoanID.Status == "NO MORE TERMS TO PAY" && amount.Amount > 0 {
@@ -51,7 +51,7 @@ func RepayAmount(response http.ResponseWriter, request *http.Request) {
 		LoanDetails.LoanID.Status = "PAID"
 	}
 	if err != nil {
-		SendHttpResponse(400, response, nil)
+		SendHttpResponse(503, response, nil)
 	}
 	SendHttpResponse(200, response, rspJson.Bytes())
 }
