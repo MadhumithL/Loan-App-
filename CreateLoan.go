@@ -37,7 +37,7 @@ var createLoanRequest createLoanReqStruct
 func CreateLoan(response http.ResponseWriter, request *http.Request) {
 	err := json.NewDecoder(request.Body).Decode(&createLoanRequest)
 	if err != nil {
-		SendHttpResponse(400, response, nil)
+		SendHttpResponse(503, response, nil)
 	}
 
 	createLoanResponse := make([]Terms, createLoanRequest.Term)
