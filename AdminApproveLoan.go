@@ -18,7 +18,7 @@ func ApproveLaon(response http.ResponseWriter, request *http.Request) {
 	jsonEncoder.SetEscapeHTML(false)
 	err := jsonEncoder.Encode(LoanDetails.LoanID)
 	if err != nil {
-		SendHttpResponse(400, response, nil)
+		SendHttpResponse(503, response, nil)
 	}
 	SendHttpResponse(200, response, rspJson.Bytes())
 }
