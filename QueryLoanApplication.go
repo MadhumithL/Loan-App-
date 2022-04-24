@@ -14,12 +14,12 @@ func TrackLoanApplication(response http.ResponseWriter, request *http.Request) {
 		LoanDetails.LoanID.Status = "NO MORE TERMS TO PAY"
 		err := jsonEncoder.Encode(LoanDetails.LoanID.Status)
 		if err != nil {
-			SendHttpResponse(400, response, nil)
+			SendHttpResponse(503, response, nil)
 		}
 	} else {
 		err := jsonEncoder.Encode(LoanDetails)
 		if err != nil {
-			SendHttpResponse(400, response, nil)
+			SendHttpResponse(503, response, nil)
 		}
 	}
 	SendHttpResponse(200, response, rspJson.Bytes())
