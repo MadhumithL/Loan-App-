@@ -29,13 +29,7 @@ func RepayAmount(response http.ResponseWriter, request *http.Request) {
 		for i := 0; i < createLoanRequest.Term; i++ {
 			if LoanDetails.LoanID.Status == "APPROVED" && LoanDetails.Terms[i].Status == "PAID" {
 				continue
-			} else if LoanDetails.LoanID.Status == "APPROVED" && LoanDetails.Terms[i].Status == "pending" && amount.Amount >= LoanDetails.Terms[i].EMI {
-				LoanDetails.Terms[i].Status = "PAID"
-				statusPaid.Status = "PAID"
-				amountRemaining = amount.Amount - LoanDetails.Terms[i].EMI + amountRemaining
-				break
-			} else if LoanDetails.LoanID.Status == "APPROVED" && LoanDetails.Terms[i].Status == "pending" && amount.Amount+amountRemaining >= LoanDetails.Terms[i].EMI {
-				fmt.Println("INTO")
+			} else if (LoanDetails.LoanID.Status == "APPROVED" && LoanDetails.Terms[i].Status == "pending" && amount.Amount >= LoanDetails.Terms[i].EMI) || (LoanDetails.LoanID.Status == "APPROVED" && LoanDetails.Terms[i].Status == "pending" && amount.Amount+amountRemaining >= LoanDetails.Terms[i].EMI){
 				LoanDetails.Terms[i].Status = "PAID"
 				statusPaid.Status = "PAID"
 				amountRemaining = amount.Amount - LoanDetails.Terms[i].EMI + amountRemaining
